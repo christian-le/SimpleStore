@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore", "SimpleStore\SimpleStore.csproj", "{E87C83A4-E5E1-4DAA-BEAB-A91893C8DD7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStore.Infrastructure", "SimpleStore.Infrastructure\SimpleStore.Infrastructure.csproj", "{7B222A48-0C50-4C34-A2D2-861B0E851668}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E87C83A4-E5E1-4DAA-BEAB-A91893C8DD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E87C83A4-E5E1-4DAA-BEAB-A91893C8DD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E87C83A4-E5E1-4DAA-BEAB-A91893C8DD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E87C83A4-E5E1-4DAA-BEAB-A91893C8DD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B222A48-0C50-4C34-A2D2-861B0E851668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B222A48-0C50-4C34-A2D2-861B0E851668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B222A48-0C50-4C34-A2D2-861B0E851668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B222A48-0C50-4C34-A2D2-861B0E851668}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50582944-4E5E-4343-A65A-07FE9D7D6545}
+	EndGlobalSection
+EndGlobal
