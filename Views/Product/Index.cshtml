@@ -1,0 +1,47 @@
+﻿@model ProductListViewModel
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="row">
+    <section class="esh-catalog-hero">
+        <div class="container">
+            <img class="esh-catalog-title" src="~/images/main_banner_text.png" />
+        </div>
+    </section>
+</div>
+<br/>
+<div class="container">
+    @if (Model.Products.Any())
+    {
+        <div class="esh-catalog-items row">
+            @foreach (var product in Model.Products)
+            {
+                <partial name="_ProductList" for="@product" />
+            }
+        </div>
+        <div class="esh-catalog-items row">
+            <div class="esh-catalog-item col-md-3">
+            </div>
+            <div class="esh-catalog-item col-md-6">
+                <div page-model="@Model.PagingInfo" page-action="Index"
+                     page-classes-enabled="true"
+                     page-class="btn"
+                     page-class-normal="btn-outline-info"
+                     page-class-selected="btn-info"
+                     class="btn-group pull-right m-1 ">
+                </div>
+            </div>
+            <div class="esh-catalog-item col-md-3">
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="esh-catalog-items row">
+            THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+        </div>
+    }
+</div>
+

@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-SimpleStore-76B3C36C-4881-4488-A5AF-DE529BA67571</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\basket\**" />
+    <Compile Remove="wwwroot\css\orders\**" />
+    <Compile Remove="wwwroot\css\shared\**" />
+    <Content Remove="wwwroot\css\basket\**" />
+    <Content Remove="wwwroot\css\orders\**" />
+    <Content Remove="wwwroot\css\shared\**" />
+    <EmbeddedResource Remove="wwwroot\css\basket\**" />
+    <EmbeddedResource Remove="wwwroot\css\orders\**" />
+    <EmbeddedResource Remove="wwwroot\css\shared\**" />
+    <None Remove="wwwroot\css\basket\**" />
+    <None Remove="wwwroot\css\orders\**" />
+    <None Remove="wwwroot\css\shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\app.component.css" />
+    <Content Remove="wwwroot\css\app.component.min.css" />
+    <Content Remove="wwwroot\css\app.component.scss" />
+    <Content Remove="wwwroot\css\app.css" />
+    <Content Remove="wwwroot\css\app.min.css" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleStore.Infrastructure\SimpleStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\css\catalog\catalog.component.scss" />
+  </ItemGroup>
+
+</Project>
