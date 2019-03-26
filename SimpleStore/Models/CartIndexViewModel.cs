@@ -1,4 +1,6 @@
-﻿namespace SimpleStore.Models
+﻿using SimpleStore.Infrastructure.Models;
+
+namespace SimpleStore.Models
 {
     public class CartIndexViewModel
     {

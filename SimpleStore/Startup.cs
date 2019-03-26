@@ -51,6 +51,9 @@ namespace SimpleStore
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICartLineRepository, CartLineRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

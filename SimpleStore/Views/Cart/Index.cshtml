@@ -30,13 +30,19 @@
                         </div>
                     </td>
                     <td data-th="Price">@line.Product.Price.ToString("c")</td>
-                    <td data-th="Quantity">
-                        <input type="number" class="form-control text-center" value="@line.Quantity" min="1">
-                    </td>
+                    <td data-th="Quantity" class="text-center">@line.Quantity</td>
+                    @*<td data-th="Quantity">
+                            <input type="number" class="form-control text-center" value="@line.Quantity" min="1" name="Quantity">
+                        </td>*@
                     <td data-th="Subtotal" class="text-center">@((line.Quantity * line.Product.Price).ToString("c"))</td>
                     <td class="actions" data-th="">
                         <div class="row">
-                            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                            <form asp-action="UpdateCartItem" method="post">
+                                <input type="hidden" name="productId" value="@line.Product.Id" />
+                                <input type="hidden" name="quantity" value="@line.Quantity" />
+                                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                                <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                            </form>
                             &nbsp;
                             <form asp-action="RemoveFromCart" method="post">
                                 <input type="hidden" name="ProductId" value="@line.Product.Id" />
@@ -54,8 +60,9 @@
                 <td><a href="@Model.ReturnUrl" class="btn btn-warning"><i class="fa fa-angle-left"></i><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total: @Model.Cart.ComputeTotalValue().ToString("c")</strong></td>
-                <td><div class="row"><a href="#" class="btn btn-success btn-block">Checkout</a></div></td>
+                <td><div class="row"><a asp-action="Checkout" asp-controller="Order" class="btn btn-success btn-block">Checkout</a></div></td>
             </tr>
         </tfoot>
+
     </table>
 </div>

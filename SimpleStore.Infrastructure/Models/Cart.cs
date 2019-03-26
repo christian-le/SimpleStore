@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SimpleStore.Models
+namespace SimpleStore.Infrastructure.Models
 {
     public class Cart
     {
@@ -34,9 +34,8 @@ namespace SimpleStore.Models
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }
 
-    public class CartLine
+    public class CartLine : BaseEntity
     {
-        public int CartLineId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
     }

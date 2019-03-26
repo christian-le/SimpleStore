@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using SimpleStore.Infrastructure.Entities;
 using SimpleStore.Infrastructure.Extensions;
+using SimpleStore.Infrastructure.Models;
 using System;
 
 namespace SimpleStore.Models

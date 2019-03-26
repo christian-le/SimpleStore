@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleStore.Models;
+using SimpleStore.Infrastructure.Models;
 
 namespace SimpleStore.Components
 {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleStore.Infrastructure.Data;
 
 namespace SimpleStore.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(SinpleStoreDbContext))]
-    partial class SinpleStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190326032939_Orders")]
+    partial class Orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,26 +40,21 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City")
-                        .IsRequired();
+                    b.Property<string>("City");
 
-                    b.Property<string>("Country")
-                        .IsRequired();
+                    b.Property<string>("Country");
 
                     b.Property<bool>("GiftWrap");
 
-                    b.Property<string>("Line1")
-                        .IsRequired();
+                    b.Property<string>("Line1");
 
                     b.Property<string>("Line2");
 
                     b.Property<string>("Line3");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("State")
-                        .IsRequired();
+                    b.Property<string>("State");
 
                     b.Property<string>("Zip");
 
@@ -91,7 +88,7 @@ namespace SimpleStore.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("SimpleStore.Infrastructure.Models.CartLine", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CartLineId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -101,7 +98,7 @@ namespace SimpleStore.Infrastructure.Data.Migrations
 
                     b.Property<int>("Quantity");
 
-                    b.HasKey("Id");
+                    b.HasKey("CartLineId");
 
                     b.HasIndex("OrderId");
 

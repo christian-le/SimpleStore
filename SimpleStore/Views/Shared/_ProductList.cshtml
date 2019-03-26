@@ -3,7 +3,7 @@
 
 <div class="esh-catalog-item col-md-4">
     <form id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="@Model.Id" name="id" />
+        <input type="hidden" asp-for="@Model.Id" name="productId" />
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <img class="esh-catalog-thumbnail" src="@Model.PictureUri" />
         <input class="esh-catalog-button" type="submit" value="[ ADD TO CART ]" />
