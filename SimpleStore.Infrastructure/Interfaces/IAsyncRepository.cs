@@ -1,15 +1,16 @@
 ﻿using SimpleStore.Infrastructure.Entities;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SimpleStore.Infrastructure.Interfaces
 {
     public interface IAsyncRepository<T> where T : BaseEntity
     {
-        Task<T> GetByIdAsync(int id);
-        Task<List<T>> ListAllAsync();
-        Task<T> AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        T GetById(int id);
+        List<T> ListAll();
+        T Add(T entity);
+        void AddRange(IEnumerable<T> entity);
+        T Update(T entity);
+        void Delete(T entity);
+        void SaveChanges();
     }
 }

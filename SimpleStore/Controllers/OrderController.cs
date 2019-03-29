@@ -32,8 +32,10 @@ namespace SimpleStore.Controllers
 
             if(ModelState.IsValid)
             {
-                order.Lines = _cart.Lines.ToArray();
                 _orderService.SaveOrder(order);
+
+                //order.Lines = _cart.Lines.ToArray();
+
                 return RedirectToAction(nameof(Completed));
             }
             else

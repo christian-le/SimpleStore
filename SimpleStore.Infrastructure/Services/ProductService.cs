@@ -1,7 +1,6 @@
 ﻿using SimpleStore.Infrastructure.Entities;
 using SimpleStore.Infrastructure.Interfaces;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SimpleStore.Infrastructure.Services
 {
@@ -14,16 +13,16 @@ namespace SimpleStore.Infrastructure.Services
             _productRepository = productRepository;
         }
 
-        public async Task<List<Product>> GetAll()
+        public List<Product> GetAll()
         {
-            var products = await _productRepository.ListAllAsync();
+            var products = _productRepository.ListAll();
 
             return products;
         }
 
-        public async Task<Product> GetById(int productId)
+        public Product GetById(int productId)
         {
-            var product = await _productRepository.GetByIdAsync(productId);
+            var product = _productRepository.GetById(productId);
 
             return product;
         }

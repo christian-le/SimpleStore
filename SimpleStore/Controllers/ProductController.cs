@@ -2,7 +2,6 @@
 using SimpleStore.Infrastructure.Services;
 using SimpleStore.Models;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SimpleStore.Controllers
 {
@@ -17,9 +16,9 @@ namespace SimpleStore.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Index(int productPage = 1)
+        public IActionResult Index(int productPage = 1)
         {
-            var products = await _productService.GetAll();
+            var products = _productService.GetAll();
 
             var model = new ProductListViewModel()
             {

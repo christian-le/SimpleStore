@@ -6,8 +6,8 @@ namespace SimpleStore.Infrastructure.Services
 {
     public interface IProductService
     {
-        Task<List<Product>> GetAll();
+        List<Product> GetAll();
 
-        Task<Product> GetById(int productId);
+        Product GetById(int productId);
     }
 }

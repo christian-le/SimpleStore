@@ -2,52 +2,62 @@
 using SimpleStore.Infrastructure.Entities;
 using SimpleStore.Infrastructure.Interfaces;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace SimpleStore.Infrastructure.Data
 {
-    /// <summary>
-    /// "There's some repetition here - couldn't we have some the sync methods call the async?"
-    /// https://blogs.msdn.microsoft.com/pfxteam/2012/04/13/should-i-expose-synchronous-wrappers-for-asynchronous-methods/
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity
     {
-        protected readonly SinpleStoreDbContext _sinpleStoreDbContext;
+        protected readonly SinpleStoreDbContext SinpleStoreDbContext;
+        protected DbSet<T> DbSet;
 
         public EfRepository(SinpleStoreDbContext dbContext)
         {
-            _sinpleStoreDbContext = dbContext;
+            SinpleStoreDbContext = dbContext;
+            DbSet = SinpleStoreDbContext.Set<T>();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual T GetById(int id)
         {
-            return await _sinpleStoreDbContext.Set<T>().FindAsync(id);
+            return DbSet.Find(id);
         }
 
-        public async Task<List<T>> ListAllAsync()
+        public List<T> ListAll()
         {
-            return await _sinpleStoreDbContext.Set<T>().ToListAsync();
+            return DbSet.ToList();
         }
 
-        public async Task<T> AddAsync(T entity)
+        public T Add(T entity)
         {
-            _sinpleStoreDbContext.Set<T>().Add(entity);
-            await _sinpleStoreDbContext.SaveChangesAsync();
+            DbSet.Add(entity);
+            SaveChanges();
 
             return entity;
         }
 
-        public async Task UpdateAsync(T entity)
+        public void AddRange(IEnumerable<T> entity)
         {
-            _sinpleStoreDbContext.Entry(entity).State = EntityState.Modified;
-            await _sinpleStoreDbContext.SaveChangesAsync();
+            DbSet.AddRange(entity);
+            SaveChanges();
         }
 
-        public async Task DeleteAsync(T entity)
+        public T Update(T entity)
         {
-            _sinpleStoreDbContext.Set<T>().Remove(entity);
-            await _sinpleStoreDbContext.SaveChangesAsync();
+            DbSet.Update(entity);
+            SaveChanges();
+
+            return entity;
+        }
+
+        public void Delete(T entity)
+        {
+            SinpleStoreDbContext.Set<T>().Remove(entity);
+            SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
+            SinpleStoreDbContext.SaveChanges();
         }
     }
 }

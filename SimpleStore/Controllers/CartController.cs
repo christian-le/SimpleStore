@@ -29,7 +29,7 @@ namespace SimpleStore.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToActionResult AddToCart(int productId, string returnUrl)
         {
-            var product = _productService.GetById(productId).Result;
+            var product = _productService.GetById(productId);
 
             if (product != null)
             {
@@ -43,7 +43,7 @@ namespace SimpleStore.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToActionResult RemoveFromCart(int productId, string returnUrl)
         {
-            var product = _productService.GetById(productId).Result;
+            var product = _productService.GetById(productId);
 
             if (product != null)
             {
@@ -57,7 +57,7 @@ namespace SimpleStore.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToActionResult UpdateCartItem(int productId, [Bind("Quantity")] int quantity, string returnUrl)
         {
-            var product = _productService.GetById(productId).Result;
+            var product = _productService.GetById(productId);
 
             if (product != null)
             {

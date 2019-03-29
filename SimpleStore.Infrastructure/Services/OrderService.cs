@@ -1,37 +1,28 @@
 ﻿using SimpleStore.Infrastructure.Entities;
 using SimpleStore.Infrastructure.Interfaces;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SimpleStore.Infrastructure.Services
 {
     public class OrderService : IOrderService
     {
         private IOrderRepository _orderRepository;
-        private ICartLineRepository _cartLineRepository;
 
-        public OrderService(IOrderRepository orderRepository, ICartLineRepository cartLineRepository)
+        public OrderService(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
-            _cartLineRepository = cartLineRepository;
         }
 
-        public async Task<List<Order>> GetAll()
+        public List<Order> GetAll()
         {
-            return await _orderRepository.ListAllAsync();
+            return _orderRepository.ListAll();
         }
 
-        public async Task SaveOrder(Order order)
+        public void SaveOrder(Order order)
         {
             if(order.Id == 0)
             {
-                var orderEntity = await _orderRepository.AddAsync(order);
-
-                //foreach(var item in order.Lines)
-                //{
-                    
-                //    await _cartLineRepository.AddAsync(item);
-                //}
+                _orderRepository.Add(order);
             }
         }
     }
