@@ -34,7 +34,7 @@ namespace SimpleStore.Infrastructure.Models
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }
 
-    public class CartLine : BaseEntity
+    public class CartLine
     {
         public Product Product { get; set; }
         public int Quantity { get; set; }

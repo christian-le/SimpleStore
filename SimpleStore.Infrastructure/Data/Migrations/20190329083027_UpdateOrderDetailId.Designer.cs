@@ -10,8 +10,8 @@ using SimpleStore.Infrastructure.Data;
 namespace SimpleStore.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(SinpleStoreDbContext))]
-    [Migration("20190326042044_UpdateCartLineTable")]
-    partial class UpdateCartLineTable
+    [Migration("20190329083027_UpdateOrderDetailId")]
+    partial class UpdateOrderDetailId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,25 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("SimpleStore.Infrastructure.Entities.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("OrderId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<decimal>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetail");
+                });
+
             modelBuilder.Entity("SimpleStore.Infrastructure.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -91,25 +110,11 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SimpleStore.Infrastructure.Models.CartLine", b =>
+            modelBuilder.Entity("SimpleStore.Infrastructure.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("OrderId");
-
-                    b.Property<int?>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartLine");
+                    b.HasOne("SimpleStore.Infrastructure.Entities.Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("SimpleStore.Infrastructure.Entities.Product", b =>
@@ -118,17 +123,6 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SimpleStore.Infrastructure.Models.CartLine", b =>
-                {
-                    b.HasOne("SimpleStore.Infrastructure.Entities.Order")
-                        .WithMany("Lines")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("SimpleStore.Infrastructure.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
                 });
 #pragma warning restore 612, 618
         }

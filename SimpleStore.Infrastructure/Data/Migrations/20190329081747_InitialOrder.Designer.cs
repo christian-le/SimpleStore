@@ -10,8 +10,8 @@ using SimpleStore.Infrastructure.Data;
 namespace SimpleStore.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(SinpleStoreDbContext))]
-    [Migration("20190326032939_Orders")]
-    partial class Orders
+    [Migration("20190329081747_InitialOrder")]
+    partial class InitialOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,27 +40,51 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
-                    b.Property<string>("Country");
+                    b.Property<string>("Country")
+                        .IsRequired();
 
                     b.Property<bool>("GiftWrap");
 
-                    b.Property<string>("Line1");
+                    b.Property<string>("Line1")
+                        .IsRequired();
 
                     b.Property<string>("Line2");
 
                     b.Property<string>("Line3");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<string>("State");
+                    b.Property<string>("State")
+                        .IsRequired();
 
                     b.Property<string>("Zip");
 
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SimpleStore.Infrastructure.Entities.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("OrderId");
+
+                    b.Property<string>("ProductId");
+
+                    b.Property<decimal>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("SimpleStore.Infrastructure.Entities.Product", b =>
@@ -86,25 +110,11 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("SimpleStore.Infrastructure.Models.CartLine", b =>
+            modelBuilder.Entity("SimpleStore.Infrastructure.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("CartLineId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("OrderId");
-
-                    b.Property<int?>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("CartLineId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartLine");
+                    b.HasOne("SimpleStore.Infrastructure.Entities.Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("SimpleStore.Infrastructure.Entities.Product", b =>
@@ -113,17 +123,6 @@ namespace SimpleStore.Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SimpleStore.Infrastructure.Models.CartLine", b =>
-                {
-                    b.HasOne("SimpleStore.Infrastructure.Entities.Order")
-                        .WithMany("Lines")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("SimpleStore.Infrastructure.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
                 });
 #pragma warning restore 612, 618
         }

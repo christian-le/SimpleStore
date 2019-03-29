@@ -51,7 +51,7 @@ namespace SimpleStore.Infrastructure.Data
 
         public void Delete(T entity)
         {
-            SinpleStoreDbContext.Set<T>().Remove(entity);
+            DbSet.Remove(entity);
             SaveChanges();
         }
 

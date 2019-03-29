@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using SimpleStore.Infrastructure.Models;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,8 +6,7 @@ namespace SimpleStore.Infrastructure.Entities
 {
     public class Order : BaseEntity
     {
-        [BindNever]
-        public ICollection<CartLine> Lines { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
 
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; }
@@ -26,5 +24,7 @@ namespace SimpleStore.Infrastructure.Entities
         [Required(ErrorMessage = "Please enter a country name")]
         public string Country { get; set; }
         public bool GiftWrap { get; set; }
+
+        public string BuyerId { get; set; }
     }
 }
