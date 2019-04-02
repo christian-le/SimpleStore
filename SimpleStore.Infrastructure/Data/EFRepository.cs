@@ -59,5 +59,10 @@ namespace SimpleStore.Infrastructure.Data
         {
             SinpleStoreDbContext.SaveChanges();
         }
+
+        public IQueryable<T> Query()
+        {
+            return DbSet.AsQueryable();
+        }
     }
 }

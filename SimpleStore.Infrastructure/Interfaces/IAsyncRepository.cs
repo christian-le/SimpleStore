@@ -1,5 +1,6 @@
 ﻿using SimpleStore.Infrastructure.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpleStore.Infrastructure.Interfaces
 {
@@ -12,5 +13,7 @@ namespace SimpleStore.Infrastructure.Interfaces
         T Update(T entity);
         void Delete(T entity);
         void SaveChanges();
+
+        IQueryable<T> Query();
     }
 }

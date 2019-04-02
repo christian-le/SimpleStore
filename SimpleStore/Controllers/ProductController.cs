@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleStore.Infrastructure.Services;
 using SimpleStore.Models;
-using System.Linq;
 
 namespace SimpleStore.Controllers
 {
@@ -18,18 +17,18 @@ namespace SimpleStore.Controllers
         [HttpGet()]
         public IActionResult Index(int productPage = 1)
         {
-            var products = _productService.GetAll();
+            int totalItems = 0;
+
+            var products = _productService.GetByQuery(productPage, pageSize, out totalItems);
 
             var model = new ProductListViewModel()
             {
-                Products = products.OrderBy(p => p.Id)
-                .Skip((productPage - 1) * pageSize)
-                .Take(pageSize),
+                Products = products,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = productPage,
                     ItemPerPage = pageSize,
-                    TotalItems = products.Count()
+                    TotalItems = totalItems
                 }
             };
 

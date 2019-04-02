@@ -1,6 +1,6 @@
 ﻿using SimpleStore.Infrastructure.Entities;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace SimpleStore.Infrastructure.Services
 {
@@ -9,5 +9,7 @@ namespace SimpleStore.Infrastructure.Services
         List<Product> GetAll();
 
         Product GetById(int productId);
+
+        IQueryable<Product> GetByQuery(int productPage, int pageSize, out int totalItems);
     }
 }
