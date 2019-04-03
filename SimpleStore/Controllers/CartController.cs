@@ -54,20 +54,26 @@ namespace SimpleStore.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public RedirectToActionResult UpdateCartItem(int productId, [Bind("Quantity")] int quantity, string returnUrl)
+        public IActionResult UpdateCartItem([FromBody]LineItemViewModel model)
         {
-            var product = _productService.GetById(productId);
+            var product = _productService.GetById(model.ProductId);
 
-            if (product != null)
+            string resultMessage = string.Empty;
+
+            if (product == null)
             {
-                _cart.RemoveLine(product);
+                resultMessage = "Invalid object";
             }
 
-            return RedirectToAction("Index", new
+            if(model.Quantity <= 0)
             {
-                returnUrl
-            });
+                model.Quantity = 1;
+            }
+
+            _cart.UpdateItem(product, model.Quantity);
+            resultMessage = "Update successfully!";
+
+            return Json(new { product, ResultMessage = resultMessage });
         }
     }
 }

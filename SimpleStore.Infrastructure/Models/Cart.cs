@@ -32,6 +32,15 @@ namespace SimpleStore.Infrastructure.Models
         public virtual void Clear() => lineCollection.Clear();
 
         public virtual IEnumerable<CartLine> Lines => lineCollection;
+        public virtual void UpdateItem(Product product, int quantity)
+        {
+            CartLine line = lineCollection.Where(p => p.Product.Id == product.Id).FirstOrDefault();
+
+            if(line != null)
+            {
+                line.Quantity = quantity;
+            }
+        }
     }
 
     public class CartLine
